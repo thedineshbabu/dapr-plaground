@@ -1,0 +1,16 @@
+apiVersion: dapr.io/v2alpha1
+kind: Subscription
+metadata:
+  name: Service2Subscriptions
+  namespace: default
+spec:
+  pubsubname: rbt-pubsub
+  topic: kf-one
+  routes:
+    rules:
+      - match: "event.type == 'createOrganization'"
+        path: /organization/create
+      - match: "event.type == 'createEmployee'"
+        path: /employee/create
+  scopes:
+  - service-2

@@ -1,0 +1,48 @@
+version: 1
+common:
+  resourcesPaths: ["./resources/"]
+env:
+  PUBSUB_NAME: rbt-pubsub
+  TOPIC_NAME: kf-one
+  DAPR_HTTP_PORT: 3510
+  DAPR_HOST: http://localhost
+  DAPR_SECRET_STORE: localsecretstore
+  CONFIG_STORE_NAME: pg-configstore
+apps:
+  - appID: service-1
+    appPort: 3310
+    appDirPath: "service-1/"
+    appProtocol: "http"
+    appLogDestination: "console"
+    daprdLogDestination: "console"
+    daprHTTPPort: 3510
+    env:
+      APP_PORT: 3310
+      PUBSUB_NAME: rbt-pubsub
+      TOPIC_NAME: kf-one
+      DAPR_HTTP_PORT: 3510
+      DAPR_HOST: http://localhost
+      DAPR_SECRET_STORE: localsecretstore
+      CONFIG_STORE_NAME: pg-configstore
+    # enableAppHealthCheck: true
+    logLevel: "warn"
+    command: ["npm", "run", "start"]
+
+  - appID: service-2
+    appPort: 3320
+    appDirPath: "service-2/"
+    appProtocol: "http"
+    appLogDestination: "console"
+    daprdLogDestination: "console"
+    daprHTTPPort: 3520
+    env:
+      APP_PORT: 3320
+      PUBSUB_NAME: rbt-pubsub
+      TOPIC_NAME: kf-one
+      DAPR_HTTP_PORT: 3520
+      DAPR_HOST: http://localhost
+      DAPR_SECRET_STORE: localsecretstore
+      CONFIG_STORE_NAME: pg-configstore
+    # enableAppHealthCheck: true
+    logLevel: "warn"
+    command: ["npm", "run", "start"]

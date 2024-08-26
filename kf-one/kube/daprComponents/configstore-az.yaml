@@ -1,0 +1,13 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: az-configstore
+  namespace: default
+spec:
+  type: configuration.azure.appconfig
+  version: v1
+  metadata:
+  - name: connectionString # connectionString should not be used when Azure Authentication mechanism is used.
+    value: Endpoint=https://kf1-dvue-pf-appconfig01.azconfig.io;Id=x7nx;Secret=Cd0eBnyeQPD1XyAWyMb7FqlHyoFzTuurG7vSzSLu6CDcfUENfH3ZJQQJ99AIACYeBjFUaSonAAABAZACtCCX
+  - name: subscribePollInterval # Optional
+    value: "10s"

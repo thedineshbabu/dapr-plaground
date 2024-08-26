@@ -1,0 +1,12 @@
+appName: service1
+
+port: 8081
+
+configmap:
+  name: service1-configmap-v1
+  data:
+    CUSTOM_HEADER: 'This app was deployed with helm!'
+
+image:
+  name: thedineshbabu/my-html-page
+  tag: latest

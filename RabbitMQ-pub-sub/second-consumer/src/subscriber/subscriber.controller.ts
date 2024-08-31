@@ -14,7 +14,7 @@ export class SubscriberController {
       {
         pubsubname: 'cpubsub',
         topic: 'organizations',
-        route: 'organizations',
+        route: 'dapr/subscribe/organizations',
       },
     ];
   }

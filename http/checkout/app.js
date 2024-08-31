@@ -2,8 +2,8 @@ import axios from "axios";
 
 const DAPR_HOST = process.env.DAPR_HOST || "http://localhost";
 const DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || "3500";
-const PUBSUB_NAME = "orderpubsub";
-const PUBSUB_TOPIC = "orders";
+const PUBSUB_NAME = "cpubsub";
+const PUBSUB_TOPIC = "organizations";
 
 async function main() {
   for (var i = 1; i <= 100; i++) {

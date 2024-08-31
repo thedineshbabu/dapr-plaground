@@ -1,0 +1,3 @@
+- pubsubname: cpubsub      # The name of the pubsub component
+  topic: orders             # The topic to subscribe to
+  route: dapr/subscribe     # The route in your application that will handle the messages

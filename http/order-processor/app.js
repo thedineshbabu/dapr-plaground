@@ -9,25 +9,16 @@ app.use(bodyParser.json({ type: "application/*+json" }));
 app.get("/dapr/subscribe", (_req, res) => {
   res.json([
     {
-      pubsubname: "orderpubsub",
-      topic: "orders",
-      // route: "orders",
-    },
-    {
-      pubsubname: "orderpubsub",
-      topic: "messages",
-    },
+      pubsubname: "cpubsub",
+      topic: "organizations",
+      route: "organizations",
+    }
   ]);
 });
 
 // Dapr subscription routes orders topic to this route
-app.post("/orders", (req, res) => {
-  console.log("Subscriber received:", req.body.data);
-  res.sendStatus(200);
-});
-
-app.post("/messages", (req, res) => {
-  console.log("Subscriber received:", req.body.data);
+app.post("/organizations", (req, res) => {
+  console.log("Subscriber received:", req.body);
   res.sendStatus(200);
 });
 

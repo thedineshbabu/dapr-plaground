@@ -1,14 +1,15 @@
-// src/subscriber/subscriber.controller.ts
-import { Controller, Post, Body, Get, Res } from '@nestjs/common';
+import { Controller, Post, Body, Logger, Get } from '@nestjs/common';
 import { SubscriberService } from './subscriber.service';
-import { Response } from 'express';
+import { Subscribe } from './dapr-subscriber.decorator';
 
 @Controller('dapr/subscribe')
 export class SubscriberController {
+  private readonly logger = new Logger(SubscriberController.name);
+
   constructor(private readonly subscriberService: SubscriberService) {}
 
   @Get()
-  getHello(): any {
+  get(): any {
     return [
       {
         pubsubname: 'cpubsub',
@@ -18,9 +19,9 @@ export class SubscriberController {
     ];
   }
 
+  @Subscribe('organizations')
   @Post('organizations')
-  handleRabbitMQMessage(@Body() data: any) {
-    console.log('Reached here');
+  handleMessage(@Body() data: any) {
     this.subscriberService.handleMessage(data);
     return { status: 'ok' };
   }

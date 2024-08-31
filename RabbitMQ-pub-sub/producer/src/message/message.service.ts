@@ -7,26 +7,28 @@ import axios from 'axios';
 export class MessageService {
   DAPR_HOST = process.env.DAPR_HOST || 'http://localhost';
   DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || '3500';
-  PUBSUB_NAME = 'orderpubsub';
-  PUBSUB_TOPIC = 'orders';
+  PUBSUB_NAME = 'cpubsub';
+  PUBSUB_TOPIC = 'organizations';
 
   randomNum() {
     return Math.floor(Math.random() * 1000);
   }
 
   async create() {
-    const message = {
-      data: 'this is a message' + this.randomNum(),
-      metadata: {
-        source: 'message-service',
-        type: 'message',
-      },
-    };
-    await axios.post(
-      `${this.DAPR_HOST}:${this.DAPR_HTTP_PORT}/v1.0/publish/${this.PUBSUB_NAME}/${this.PUBSUB_TOPIC}`,
-      message,
-    );
-    return message;
+    try {
+      const message = {
+        data: 'Organization Created - ' + this.randomNum()
+      };
+      await axios.post(
+        `${this.DAPR_HOST}:${this.DAPR_HTTP_PORT}/v1.0/publish/${this.PUBSUB_NAME}/${this.PUBSUB_TOPIC}`,
+        message,
+      );
+      return message;
+    }
+    catch (error) {
+      console.error(error);
+      return error;
+    }
   }
 
   findAll() {

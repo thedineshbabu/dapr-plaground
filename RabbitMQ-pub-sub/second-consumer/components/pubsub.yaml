@@ -13,11 +13,11 @@ spec:
     value: 'true'
   - name: autoAck
     value: 'false'
-  - name: exchange
-    value: 'amq.topic'
-  - name: queue
-    value: 'dapr'
-  - name: routingKey
-    value: 'dapr'
-  - name: maxInflight
-    value: '1'
+  # - name: exchange
+  #   value: 'amq.topic'
+  # - name: queue
+  #   value: 'dapr'
+  # - name: routingKey
+  #   value: 'dapr'
+  # - name: maxInflight
+  #   value: '1'

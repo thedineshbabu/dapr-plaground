@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import axios from 'axios';
 
@@ -8,7 +7,7 @@ export class MessageService {
   DAPR_HOST = process.env.DAPR_HOST || 'http://localhost';
   DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || '3500';
   PUBSUB_NAME = 'cpubsub';
-  PUBSUB_TOPIC = 'organizations';
+  PUBSUB_TOPIC = 'kfone';
 
   randomNum() {
     return Math.floor(Math.random() * 1000);

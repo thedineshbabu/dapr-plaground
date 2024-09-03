@@ -1,18 +1,7 @@
-# apiVersion: dapr.io/v1alpha1
-# kind: Component
-# metadata:
-#   name: cpubsub
-#   namespace: default
-# spec:
-#   type: pubsub.rabbitmq
-#   version: v1
-#   metadata:
-#   - name: host
-#     value: 'amqp://guest:guest@localhost:5672'
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: cpubsub
+  name: 2cpubsub
   namespace: default
 spec:
   type: pubsub.rabbitmq
@@ -37,7 +26,7 @@ spec:
     - name: ttlInSeconds
       value: "60"  # Message TTL (time-to-live)
     - name: queueName
-      value: "kfone-queue"  # Optional, custom queue name
+      value: "kfone-queue2"  # Optional, custom queue name
     - name: exchangeKind
       value: "topic"  # Exchange type (direct, fanout, topic, headers)
     - name: maxPriority

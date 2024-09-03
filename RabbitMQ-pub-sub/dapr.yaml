@@ -1,0 +1,9 @@
+version: 1
+apps:
+  - appID: producer
+  - appPort: 3300
+  - appDirPath: .
+  - appProtocol: http
+  - componentsPath: "./components"
+  - daprHTTPPort: 3500
+  - command: ["npm", "run", "start"]

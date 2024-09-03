@@ -126,9 +126,9 @@ export class AppController {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3500/listen',
+        url: `${this.DAPR_HOST}:${this.daprPort}/listen`,
         headers: {
-          'dapr-app-id': 'secondconsumer',
+          'dapr-app-id': 'second-consumer',
         },
       };
 

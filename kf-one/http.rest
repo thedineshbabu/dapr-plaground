@@ -1,0 +1,27 @@
+### Create an Organization
+POST http://localhost:3310/createorganization
+Content-Type: application/json
+
+{
+  "name": "ORG001",
+  "description": "organization 001",
+  "domain": "org.com",
+  "logo": "string"
+}
+
+### Create an Employee
+POST http://localhost:3310/createemployee
+Content-Type: application/json
+
+{
+  "name": "EMP 1",
+  "email": "emp@xyz.com",
+  "password": "***",
+  "organizationId": "001",
+  "role": "admin"
+}
+
+### Call IAM Service From KF Advance Service
+
+GET http://localhost:3312/invokeiamservice
+Content-Type: application/json

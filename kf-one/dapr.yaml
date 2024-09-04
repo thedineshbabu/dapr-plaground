@@ -14,7 +14,7 @@ apps:
 
   - appID: "kf-advance-service"
     appPort: 3311
-    appDirPath: "kf-iam-service/"
+    appDirPath: "kf-advance-service/"
     appProtocol: "http"
     resourcesPaths: ["./dapr/components/"]
     configFilePath: "./dapr/config/config.yaml"
@@ -26,7 +26,7 @@ apps:
 
   - appID: "kf-insights-service"
     appPort: 3312
-    appDirPath: "kf-iam-service/"
+    appDirPath: "kf-insights-service/"
     appProtocol: "http"
     resourcesPaths: ["./dapr/components/"]
     configFilePath: "./dapr/config/config.yaml"

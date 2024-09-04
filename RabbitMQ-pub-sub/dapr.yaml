@@ -4,30 +4,31 @@ apps:
     appPort: 3300
     appDirPath: "producer/"
     appProtocol: "http"
-    # componentsPath: "./components"
-    resourcesPaths: ["/components/"]
+    resourcesPaths: ["./components/"]
     configFilePath: "./config/config.yaml"
     appLogDestination: "console"
     daprdLogDestination: "console"
     daprHTTPPort: 3500
     logLevel: "warn"
     command: ["npm", "run", "start"]
+
   - appID: "first-consumer"
     appPort: 3301
     appDirPath: "first-consumer/"
     appProtocol: "http"
-    resourcesPaths: ["/dapr/components"]
+    resourcesPaths: ["./dapr/components"]
     configFilePath: "./dapr/config/config.yaml"
     appLogDestination: "console"
     daprdLogDestination: "console"
     daprHTTPPort: 3501
     logLevel: "warn"
     command: ["npm", "run", "start"]
+    
   - appID: "second-consumer"
     appPort: 3302
     appDirPath: "second-consumer/"
     appProtocol: "http"
-    resourcesPaths: ["/dapr/components"]
+    resourcesPaths: ["./dapr/components"]
     configFilePath: "./dapr/config/config.yaml"
     appLogDestination: "console"
     daprdLogDestination: "console"

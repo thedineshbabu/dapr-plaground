@@ -20,7 +20,7 @@ export class AppController {
   @ApiOperation({ summary: 'Publish a message' })
   publishMessage(@Body() body: any): any {
     console.log('publishing', body);
-    console.log();
+    // console.log();
     axios
       .post(this.pubsubEndpoint, body, {
         headers: {

@@ -1,0 +1,24 @@
+### Post an organization
+POST http://localhost:3300/publish
+Content-Type: application/json
+
+{
+  "type": "organization",
+  "data": {
+    "id": 1,
+    "name": "Organization 1"
+  }
+}
+
+### Post an employee
+POST http://localhost:3300/publish
+Content-Type: application/json
+
+{
+  "type": "employee",
+  "data": {
+    "id": 1,
+    "name": "Employee 1",
+    "organizationId": 1
+  }
+}

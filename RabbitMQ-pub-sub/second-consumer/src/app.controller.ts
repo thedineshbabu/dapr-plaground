@@ -21,17 +21,17 @@ export class AppController {
 
     (req as http.IncomingMessage).on('end', () => {
       const buffer = Buffer.concat(chunks);
-      console.log('Raw Buffer:', buffer);
+      // console.log('Raw Buffer:', buffer);
 
       // If you want to convert the buffer to a string:
       const rawBody = buffer.toString('utf8');
-      console.log('Raw Body:', rawBody);
+      // console.log('Raw Body:', rawBody);
 
       // If the body is JSON, you can parse it:
       let parsedBody;
       try {
         parsedBody = JSON.parse(rawBody);
-        console.log('Parsed Body:', parsedBody);
+        console.log('Parsed Body:', parsedBody.data);
       } catch (err) {
         console.error('Error parsing JSON:', err);
       }

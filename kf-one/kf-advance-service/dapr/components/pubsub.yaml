@@ -1,0 +1,37 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: kfpubsub
+  namespace: default
+spec:
+  type: pubsub.rabbitmq
+  version: v1
+  metadata:
+    - name: host
+      value: 'amqp://guest:guest@localhost:5672'
+    - name: durable
+      value: "true"
+    - name: autoAck
+      value: "false"
+    - name: deliveryMode
+      value: "2"  # Persistent messages
+    - name: prefetchCount
+      value: "10" # Maximum number of unacknowledged messages per consumer
+    - name: reconnectWait
+      value: "5s" # Time to wait before reconnecting after a connection failure
+    - name: disableQueueDeclare
+      value: "false" # Set to true to disable queue declaration
+    - name: disableExchangeDeclare
+      value: "false" # Set to true to disable exchange declaration
+    - name: ttlInSeconds
+      value: "60"  # Message TTL (time-to-live)
+    - name: topic
+      value: "kfone"  # Optional, custom topic name
+    - name: queueName
+      value: "kfone-queue"  # Optional, custom queue name
+    - name: exchangeKind
+      value: "topic"  # Exchange type (direct, fanout, topic, headers)
+    - name: maxPriority
+      value: "10"  # Optional, sets max priority level for the queue
+# auth:
+#   secretStore: <secret-store-name>  # Optional, if using secret store for credentials

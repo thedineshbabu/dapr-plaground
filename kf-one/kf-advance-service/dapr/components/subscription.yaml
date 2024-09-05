@@ -4,12 +4,12 @@ metadata:
   name: kfadvanceserviceSubscriptions
   namespace: default
 spec:
-  pubsubname: kfpubsub
+  pubsubname: kf-pubsub
   topic: kfone
   routes:
     rules:
-      - match: "event.type == 'organization'"
-        path: organizations
-      - match: "event.type == 'employee'"
-        path: employees
+      - match: "event.type == 'createOrganization'"
+        path: createOrganization
+      # - match: "event.type == 'createEmployee'"
+      #   path: createEmployee
     # default: products

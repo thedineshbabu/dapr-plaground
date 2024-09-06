@@ -2,6 +2,7 @@
 # kind: Component
 # metadata:
 #   name: configstore
+#   namespace: default
 # spec:
 #   type: configuration.postgresql
 #   version: v1
@@ -36,15 +37,3 @@
 #     # Uncomment this if you wish to use PostgreSQL as a state store for actors (optional)
 #     #- name: actorStateStore
 #     #  value: "true"
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: configstore
-spec:
-  type: configuration.redis
-  version: v1
-  metadata:
-  - name: redisHost
-    value: localhost:6379
-  - name: redisPassword
-    value: ""

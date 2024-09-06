@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
-// import { NestExpressApplication } from '@nestjs/platform-express';
 
 @Injectable()
 export class ConfigService {
@@ -12,12 +11,7 @@ export class ConfigService {
   private readonly appPort = process.env.APP_PORT ?? 3310;
   private readonly daprConfigurationStore = 'configstore';
   private readonly baseUrl = `http://${this.daprHost}:${this.daprPort}/v1.0/configuration/${this.daprConfigurationStore}`;
-  private readonly configurationItems = [
-    'app.timeout',
-    'app.retries',
-    'db.max_connections',
-    'feature.new_ui',
-  ];
+  private readonly configurationItems = ['kf1topicname', 'kf1pubsub'];
 
   constructor(
     private readonly httpService: HttpService,
@@ -61,7 +55,7 @@ export class ConfigService {
 
       const response: AxiosResponse = await firstValueFrom(
         this.httpService.get(
-          `${this.baseUrl}/subscribe?metadata.pgNotifyChannel=config`,
+          `${this.baseUrl}/subscribe?metadata.pgNotifyChannel=config&metadata.sentinelkey=kfSentinelKey`,
         ),
       );
       this.logger.log(

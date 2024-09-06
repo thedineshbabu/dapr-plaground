@@ -25,3 +25,14 @@ Content-Type: application/json
 
 GET http://localhost:3312/invokeiamservice
 Content-Type: application/json
+
+### Get Secret From KF Insights Service
+
+GET http://localhost:3311/secret
+Content-Type: application/json
+
+### Get Secret From KF IAM Service
+
+GET http://localhost:3310/secret
+Content-Type: application/json
+

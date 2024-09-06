@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, Logger } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import {
   ApiBody,
@@ -19,9 +26,12 @@ export class AppController {
 
   daprHost = process.env.DAPR_HOST || 'http://localhost';
   daprPort = process.env.DAPR_HTTP_PORT || '3510';
+  base_url = `${this.daprHost}:${this.daprPort}`;
   pubsubName = 'kf-pubsub';
   topicName = 'kfone';
   pubsubEndpoint = `${this.daprHost}:${this.daprPort}/v1.0/publish/${this.pubsubName}/${this.topicName}`;
+  DAPR_SECRET_STORE = 'localsecretstore';
+  SECRET_NAME = 'secret';
 
   @Get()
   getHello(): string {
@@ -111,6 +121,33 @@ export class AppController {
   async invokeIamService(): Promise<string> {
     this.logger.info('Invoking IAM Service');
     return 'response from KF IAM Service';
+  }
+
+  @Get('secret')
+  @ApiOperation({
+    summary: 'A GET method API to get secret',
+    description: 'A GET method API to get secret',
+    operationId: 'get secret',
+  })
+  @ApiCreatedResponse({
+    description: 'Successfully fetched secret.',
+  }) // 201
+  @ApiForbiddenResponse({ description: 'Forbidden.' }) // 403
+  async getSecret(): Promise<any> {
+    this.logger.info('Fetching secret');
+    try {
+      const response = await axios.get(
+        `${this.base_url}/v1.0/secrets/${this.DAPR_SECRET_STORE}/${this.SECRET_NAME}`,
+      );
+      this.logger.info('Secret fetched');
+      return response.data; // Return the secret data
+    } catch (error) {
+      this.logger.error('Error fetching secret', error);
+      throw new HttpException(
+        'Failed to fetch secret',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Post('configuration/configstore')

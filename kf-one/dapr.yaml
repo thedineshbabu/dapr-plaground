@@ -12,26 +12,26 @@ apps:
     logLevel: "warn"
     command: ["npm", "run", "start"]
 
-  - appID: "kf-advance-service"
-    appPort: 3311
-    appDirPath: "kf-advance-service/"
-    appProtocol: "http"
-    resourcesPaths: ["./dapr/components/"]
-    configFilePath: "./dapr/config/config.yaml"
-    appLogDestination: "console"
-    daprdLogDestination: "console"
-    daprHTTPPort: 3511
-    logLevel: "warn"
-    command: ["npm", "run", "start"]
+  # - appID: "kf-advance-service"
+  #   appPort: 3311
+  #   appDirPath: "kf-advance-service/"
+  #   appProtocol: "http"
+  #   resourcesPaths: ["./dapr/components/"]
+  #   configFilePath: "./dapr/config/config.yaml"
+  #   appLogDestination: "console"
+  #   daprdLogDestination: "console"
+  #   daprHTTPPort: 3511
+  #   logLevel: "warn"
+  #   command: ["npm", "run", "start"]
 
-  - appID: "kf-insights-service"
-    appPort: 3312
-    appDirPath: "kf-insights-service/"
-    appProtocol: "http"
-    resourcesPaths: ["./dapr/components/"]
-    configFilePath: "./dapr/config/config.yaml"
-    appLogDestination: "console"
-    daprdLogDestination: "console"
-    daprHTTPPort: 3512
-    logLevel: "warn"
-    command: ["npm", "run", "start"]
+  # - appID: "kf-insights-service"
+  #   appPort: 3312
+  #   appDirPath: "kf-insights-service/"
+  #   appProtocol: "http"
+  #   resourcesPaths: ["./dapr/components/"]
+  #   configFilePath: "./dapr/config/config.yaml"
+  #   appLogDestination: "console"
+  #   daprdLogDestination: "console"
+  #   daprHTTPPort: 3512
+  #   logLevel: "warn"
+  #   command: ["npm", "run", "start"]

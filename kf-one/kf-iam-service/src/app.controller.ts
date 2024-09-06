@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
 import {
   ApiBody,
@@ -9,10 +9,12 @@ import {
 } from '@nestjs/swagger';
 import axios from 'axios';
 import { CreateOrganizationDto, CreateEmployeeDto, eventWrapper } from './dtos';
+import { DaprLogger } from './dapr.logger';
 
 @Controller()
 @ApiTags('api')
 export class AppController {
+  private readonly logger = new DaprLogger();
   constructor(private readonly appService: AppService) {}
 
   daprHost = process.env.DAPR_HOST || 'http://localhost';
@@ -40,7 +42,7 @@ export class AppController {
   createOrganization(
     @Body() createOrganizationDto: CreateOrganizationDto,
   ): any {
-    console.log('publishing Org details', createOrganizationDto);
+    this.logger.info('publishing Org details', createOrganizationDto);
     const eventObject: eventWrapper = {
       type: 'createOrganization',
       source: 'kf-one',
@@ -74,7 +76,7 @@ export class AppController {
   @ApiForbiddenResponse({ description: 'Forbidden.' }) // 403
   @ApiBody({ type: CreateEmployeeDto })
   createEmployee(@Body() createEmployeeDto: CreateEmployeeDto): any {
-    console.log('publishing Org details', createEmployeeDto);
+    this.logger.info('publishing Org details', createEmployeeDto);
     const eventObject: eventWrapper = {
       type: 'createEmployee',
       source: 'kf-one',
@@ -90,7 +92,7 @@ export class AppController {
         return 1;
       })
       .catch((error) => {
-        console.error('There was an error!', error);
+        this.logger.error('There was an error!', error);
         return 0;
       });
     return 1;
@@ -107,7 +109,13 @@ export class AppController {
   }) // 201
   @ApiForbiddenResponse({ description: 'Forbidden.' }) // 403
   async invokeIamService(): Promise<string> {
-    console.log('Invoking IAM Service');
+    this.logger.info('Invoking IAM Service');
     return 'response from KF IAM Service';
+  }
+
+  @Post('configuration/configstore')
+  handleConfigUpdate(@Body() body: any) {
+    this.logger.info(`Configuration update: ${JSON.stringify(body.items)}`);
+    return { status: 200 };
   }
 }

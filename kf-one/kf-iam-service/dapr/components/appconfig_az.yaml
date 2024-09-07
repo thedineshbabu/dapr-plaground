@@ -1,7 +1,7 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: configstore
+  name: az-configstore
   namespace: default
 spec:
   type: configuration.azure.appconfig
@@ -11,8 +11,6 @@ spec:
   #   value: https://kf1-dvue-pf-appconfig01.azconfig.io
   - name: connectionString # connectionString should not be used when Azure Authentication mechanism is used.
     value: Endpoint=https://kf1-dvue-pf-appconfig01.azconfig.io;Id=x7nx;Secret=Cd0eBnyeQPD1XyAWyMb7FqlHyoFzTuurG7vSzSLu6CDcfUENfH3ZJQQJ99AIACYeBjFUaSonAAABAZACtCCX
-  - name: sentinalKey # Optional
-    value: "sentinelKey"
   # - name: maxRetries
   #   value: # Optional
   # - name: retryDelay

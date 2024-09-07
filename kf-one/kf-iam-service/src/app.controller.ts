@@ -25,17 +25,17 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   daprHost = process.env.DAPR_HOST || 'http://localhost';
-  daprPort = process.env.DAPR_HTTP_PORT || '3510';
+  daprPort = process.env.DAPR_HTTP_PORT || '3500';
   base_url = `${this.daprHost}:${this.daprPort}`;
-  pubsubName = 'kf-pubsub';
-  topicName = 'kfone';
+  pubsubName = process.env.PUBSUB_NAME || 'kf-pubsub';
+  topicName = process.env.TOPIC_NAME || 'kfone';
   pubsubEndpoint = `${this.daprHost}:${this.daprPort}/v1.0/publish/${this.pubsubName}/${this.topicName}`;
-  DAPR_SECRET_STORE = 'localsecretstore';
+  DAPR_SECRET_STORE = process.env.DAPR_SECRET_STORE || 'localsecretstore';
   SECRET_NAME = 'secret';
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getApp(): string {
+    return 'KF IAM service is running';
   }
 
   @Post('createOrganization')
@@ -150,9 +150,9 @@ export class AppController {
     }
   }
 
-  @Post('configuration/configstore')
-  handleConfigUpdate(@Body() body: any) {
-    this.logger.info(`Configuration update: ${JSON.stringify(body.items)}`);
-    return { status: 200 };
-  }
+  // @Post('configuration/configstore')
+  // handleConfigUpdate(@Body() body: any) {
+  //   this.logger.info(`Configuration update: ${JSON.stringify(body.items)}`);
+  //   return { status: 200 };
+  // }
 }

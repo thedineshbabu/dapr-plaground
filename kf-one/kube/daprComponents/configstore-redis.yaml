@@ -8,6 +8,8 @@ spec:
   version: v1
   metadata:
   - name: redisHost
-    value: localhost:6379
+    value: <REPLACE WITH HOSTNAME FROM ABOVE - for Redis on Kubernetes it is redis-master.default.svc.cluster.local:6379>
   - name: redisPassword
-    value: ""
+    secretKeyRef:
+      name: redis
+      key: redis-password

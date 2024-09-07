@@ -4,7 +4,7 @@ import { Logger } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('AppConfig')
-@Controller('configuration/configstore')
+@Controller('configuration/pg-configstore')
 export class ConfigController {
   private readonly logger = new Logger(ConfigController.name);
 

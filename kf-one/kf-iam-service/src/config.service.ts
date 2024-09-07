@@ -10,7 +10,7 @@ export class ConfigService {
   private readonly daprPort = process.env.DAPR_HTTP_PORT ?? 3510;
   private readonly appPort = process.env.APP_PORT ?? 3310;
   private readonly daprConfigurationStore =
-    process.env.daprConfigurationStore ?? 'redis-configstore';
+    process.env.daprConfigurationStore ?? 'pg-configstore';
   private readonly baseUrl = `http://${this.daprHost}:${this.daprPort}/v1.0/configuration/${this.daprConfigurationStore}`;
   private readonly configurationItems = ['kf1topicname', 'kf1pubsub'];
 
@@ -56,7 +56,7 @@ export class ConfigService {
 
       const response: AxiosResponse = await firstValueFrom(
         this.httpService.get(
-          `${this.baseUrl}/subscribe?metadata.pgNotifyChannel=config&metadata.sentinelkey=kfSentinelKey`,
+          `${this.baseUrl}/subscribe?metadata.pgNotifyChannel=config`, // &metadata.sentinelkey=kfSentinelKey
         ),
       );
       this.logger.log(

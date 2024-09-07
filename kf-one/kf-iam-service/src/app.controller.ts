@@ -27,8 +27,8 @@ export class AppController {
   daprHost = process.env.DAPR_HOST || 'http://localhost';
   daprPort = process.env.DAPR_HTTP_PORT || '3500';
   base_url = `${this.daprHost}:${this.daprPort}`;
-  pubsubName = process.env.PUBSUB_NAME || 'kf-pubsub';
-  topicName = process.env.TOPIC_NAME || 'kfone';
+  pubsubName = process.env.PUBSUB_NAME || 'rbt-pubsub';
+  topicName = process.env.TOPIC_NAME || 'kf-one';
   pubsubEndpoint = `${this.daprHost}:${this.daprPort}/v1.0/publish/${this.pubsubName}/${this.topicName}`;
   DAPR_SECRET_STORE = process.env.DAPR_SECRET_STORE || 'localsecretstore';
   SECRET_NAME = 'secret';

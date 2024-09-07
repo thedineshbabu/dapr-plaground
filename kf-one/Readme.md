@@ -147,4 +147,15 @@ To Access the RabbitMQ Management interface:
 WARNING: There are "resources" sections in the chart not set. Using "resourcesPreset" is not recommended for production. For production installations, please set the following values according to your workload needs:
   - resources
 +info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+
+
+
+APP_PORT= 3310
+PUBSUB_NAME= kf-pubsub
+TOPIC_NAME= kf-one
+DAPR_HTTP_PORT= 3510
+DAPR_HOST= http://localhost
+DAPR_SECRET_STORE= localsecretstore
+daprConfigurationStore= localkvstore
+
 ```

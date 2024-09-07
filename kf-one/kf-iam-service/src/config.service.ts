@@ -9,7 +9,8 @@ export class ConfigService {
   private readonly daprHost = process.env.DAPR_HOST ?? 'localhost';
   private readonly daprPort = process.env.DAPR_HTTP_PORT ?? 3510;
   private readonly appPort = process.env.APP_PORT ?? 3310;
-  private readonly daprConfigurationStore = process.env.daprConfigurationStore ?? 'redis-configstore';
+  private readonly daprConfigurationStore =
+    process.env.daprConfigurationStore ?? 'redis-configstore';
   private readonly baseUrl = `http://${this.daprHost}:${this.daprPort}/v1.0/configuration/${this.daprConfigurationStore}`;
   private readonly configurationItems = ['kf1topicname', 'kf1pubsub'];
 

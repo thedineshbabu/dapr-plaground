@@ -34,6 +34,7 @@ apps:
     appProtocol: "http"
     appLogDestination: "console"
     daprdLogDestination: "console"
+    # resourcesPaths: ["./dapr/components/"]
     daprHTTPPort: 3520
     env:
       APP_PORT: 3320

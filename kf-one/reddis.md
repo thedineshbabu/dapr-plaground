@@ -4,6 +4,8 @@ To get your password run:
 
     export REDIS_PASSWORD=$(kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 -d)
 
+    
+
 To connect to your Redis&reg; server:
 
 1. Run a Redis&reg; pod that you can use as a client:

@@ -81,6 +81,7 @@ export class AppController {
       data: createOrganizationDto,
     };
     this.logger.log('publishing Org details', JSON.stringify(eventObject));
+    console.log('pubsubEndpoint', this.pubsubEndpoint);
     axios
       .post(this.pubsubEndpoint, eventObject, {
         headers: {
@@ -159,9 +160,9 @@ export class AppController {
   async getSecret(): Promise<any> {
     this.logger.log('Fetching secret');
     try {
-      const response = await axios.get(
-        `${this.base_url}/v1.0/secrets/${this.DAPR_SECRET_STORE}/${this.SECRET_NAME}`,
-      );
+      const secretUrl = `${this.base_url}/v1.0/secrets/${this.DAPR_SECRET_STORE}/${this.SECRET_NAME}`;
+      console.log('secretUrl', secretUrl);
+      const response = await axios.get(secretUrl);
       const secretData = JSON.stringify(response.data);
       this.logger.log(`Secret Value: ` + secretData);
       this.logger.log('Secret fetched');

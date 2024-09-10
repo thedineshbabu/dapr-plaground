@@ -109,4 +109,20 @@ export class ConfigurationController {
       res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
     }
   }
+
+  @Post('redis-configstore/*')
+  redisHandleConfigUpdate(@Body() body: any, @Res() res: Response) {
+    try {
+      // Log the entire body received
+      this.logger.log(`Received configuration update: ${JSON.stringify(body)}`);
+
+      // Send success response
+      res.status(HttpStatus.OK).json({
+        message: 'Configuration updated successfully',
+      });
+    } catch (error) {
+      this.logger.error('Error in configuration update', error);
+      res.status(HttpStatus.BAD_REQUEST).json({ message: error.message });
+    }
+  }
 }

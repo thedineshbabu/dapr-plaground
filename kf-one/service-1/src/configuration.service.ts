@@ -10,16 +10,12 @@ export class ConfigurationService {
   private readonly daprHost = this.configService.get<string>('DAPR_HOST');
   private readonly daprPort = this.configService.get<string>('DAPR_HTTP_PORT');
   private readonly appPort = this.configService.get<string>('APP_PORT');
+  // private readonly configurationItems: string[] =
+  //   this.configService.get<string[]>('CONFIG_ITEMS');
   private readonly daprConfigurationStore =
     this.configService.get<string>('CONFIG_STORE_NAME');
   private readonly baseUrl = `${this.daprHost}:${this.daprPort}/v1.0/configuration/${this.daprConfigurationStore}`;
-  private readonly configurationItems = [
-    'kf1topicname',
-    'kf1pubsub',
-    'CONFIG_STORE_NAME',
-    'PUBSUB_NAME',
-    'DAPR_SECRET_STORE',
-  ];
+  private readonly configurationItems = ['kf1topicname', 'kf1pubsubname'];
 
   constructor(
     private readonly httpService: HttpService,
@@ -33,6 +29,7 @@ export class ConfigurationService {
     this.logger.log(`AppPort: ${this.appPort}`);
     this.logger.log(`DaprConfigurationStore: ${this.daprConfigurationStore}`);
     this.logger.log(`BaseUrl: ${this.baseUrl}`);
+    this.logger.log(`ConfigurationItems: ${this.configurationItems}`);
 
     // Get config items from the config store
     await Promise.all(

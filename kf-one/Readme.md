@@ -97,4 +97,6 @@ DAPR_HOST= http://localhost
 DAPR_SECRET_STORE= localsecretstore
 daprConfigurationStore= localkvstore
 
+kubectl create secret generic secret --from-file ./secret
+
 ```

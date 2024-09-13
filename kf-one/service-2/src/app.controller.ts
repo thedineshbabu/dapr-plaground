@@ -49,6 +49,7 @@ export class AppController {
     this.dynamicConfigService.getConfig('DAPR_SECRET_STORE') ??
     this.configService.get<string>('DAPR_SECRET_STORE');
   SECRET_NAME = 'secret';
+  SERVICE1_APP_ID = this.configService.get<string>('SERVICE1_APP_ID');
 
   // daprHost = this.configService.get<string>('DAPR_HOST');
   // daprPort = this.configService.get<string>('DAPR_HTTP_PORT');
@@ -61,7 +62,7 @@ export class AppController {
 
   @Get()
   getApp(): string {
-    return 'Service 1 is running';
+    return 'Service 2 is running';
   }
 
   @Post('organization/create')
@@ -192,7 +193,7 @@ export class AppController {
       maxBodyLength: Infinity,
       url: `${this.daprHost}:${this.daprPort}/service1`,
       headers: {
-        'dapr-app-id': 'service-1',
+        'dapr-app-id': this.SERVICE1_APP_ID,
       },
     };
 

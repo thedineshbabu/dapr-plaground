@@ -1,5 +1,7 @@
 ```
  helm install rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq
+ ```
+ ```
 Pulled: registry-1.docker.io/bitnamicharts/rabbitmq:14.6.9
 Digest: sha256:2e9ae204fa930cde718c78c7e21af6766c1538bbcb15a386619439bd9fae7a53
 NAME: rabbitmq
@@ -41,5 +43,5 @@ WARNING: There are "resources" sections in the chart not set. Using "resourcesPr
 +info https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 
 user
-BfubkNiRIqzvaJUa
+ACUuWLRnnQKWUFIR
 ```

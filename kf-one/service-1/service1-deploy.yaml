@@ -1,0 +1,54 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-1
+  labels:
+    app: service-1
+spec:
+  selector:
+    app: service-1
+  ports:
+  - port: 80
+    targetPort: 8081
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-1
+  labels:
+    app: service-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-1
+  template:
+    metadata:
+      labels:
+        app: service-1
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "service-1"
+        dapr.io/app-port: "8081"
+    spec:
+      containers:
+      - name: service-1
+        image: thedineshbabukf/service1:v5.0
+        env:
+        - name: PUBSUB_NAME
+          value: "pubsub"
+        - name: TOPIC_NAME
+          value: "kf-one"
+        - name: DAPR_SECRET_STORE
+          value: "kubernetes"
+        - name: CONFIG_STORE_NAME
+          value: "pg-configstore"
+        - name: CONFIG_ITEMS
+          value: "kf1topicname, kf1pubsubname"
+        - name: DAPR_HOST
+          value: "http://localhost"
+        ports:
+        - containerPort: 8081
+        imagePullPolicy: Always

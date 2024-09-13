@@ -1,0 +1,71 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: service-2
+  labels:
+    app: service-2
+spec:
+  selector:
+    app: service-2
+  ports:
+  - port: 80
+    targetPort: 8081
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-2
+  labels:
+    app: service-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-2
+  template:
+    metadata:
+      labels:
+        app: service-2
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "service-2"
+        dapr.io/app-port: "8081"
+    spec:
+      containers:
+      - name: service-2
+        image: thedineshbabukf/service2:v3
+        env:
+        - name: PUBSUB_NAME
+          value: "pubsub"
+        - name: TOPIC_NAME
+          value: "kf-one"
+        - name: DAPR_SECRET_STORE
+          value: "kubernetes"
+        - name: CONFIG_STORE_NAME
+          value: "pg-configstore"
+        - name: CONFIG_ITEMS
+          value: "kf1topicname, kf1pubsubname"
+        - name: DAPR_HOST
+          value: "http://localhost"
+        - name: SERVICE1_APP_ID
+          value: "service-1"
+        ports:
+        - containerPort: 8081
+        imagePullPolicy: Always
+---
+apiVersion: dapr.io/v2alpha1
+kind: Subscription
+metadata:
+  name: service2subscriptions
+spec:
+  pubsubname: pubsub
+  topic: kf-one
+  routes:
+    rules:
+      - match: "event.type == 'createOrganization'"
+        path: /organization/create
+      - match: "event.type == 'createEmployee'"
+        path: /employee/create
+scopes:
+- service-2

@@ -11,6 +11,9 @@ CREATE TABLE user_verification (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 ```
+```
+docker run -d --name mailcatcher -p 1025:1025 -p 1080:1080 dockage/mailcatcher
+```
 
 ```bash
 $ dapr run --app-id kf-iam-service --app-port 3310 --app-protocol http --dapr-http-port 3510 --components-path .\components\  npm run start

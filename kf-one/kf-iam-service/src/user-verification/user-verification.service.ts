@@ -22,10 +22,11 @@ export class UserVerificationService {
     let user = await this.userVerificationRepo.findOne({ where: { email: dto.email } });
 
     if (!user) {
-      user = this.userVerificationRepo.create({ email: dto.email, otp, otp_expires_at: otpExpiresAt });
+      user = this.userVerificationRepo.create({ email: dto.email, otp, otp_expires_at: otpExpiresAt, is_verified: false });
     } else {
       user.otp = otp;
       user.otp_expires_at = otpExpiresAt;
+      user.is_verified = false; // Reset verification status
     }
 
     await this.userVerificationRepo.save(user);
@@ -52,12 +53,17 @@ export class UserVerificationService {
   }
 
   private async sendEmail(email: string, otp: string) {
+    // const transporter = nodemailer.createTransport({
+    //   service: 'gmail',
+    //   auth: {
+    //     user: 'your-email@gmail.com',
+    //     pass: 'your-email-password',
+    //   },
+    // });
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'your-email@gmail.com',
-        pass: 'your-email-password',
-      },
+      host: '127.0.0.1',  // MailCatcher SMTP server
+      port: 1025,         // MailCatcher default SMTP port
+      secure: false,      // MailCatcher does not use SSL/TLS
     });
 
     await transporter.sendMail({

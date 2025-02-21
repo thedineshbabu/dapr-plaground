@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ConfigService } from './config.service';
+// import { ConfigService } from './config.service';
 
 async function bootstrap() {
   const appPort = process.env.APP_PORT ?? 8081;
   const app = await NestFactory.create(AppModule);
-  const configService = app.get(ConfigService);
-  await configService.main();
+  // const configService = app.get(ConfigService);
+  // await configService.main();
   const config = new DocumentBuilder()
     .setTitle('IAM API Documentation')
     .setDescription('The IAM API description')
@@ -18,5 +18,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
   await app.listen(appPort);
+  console.log(`IAM Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

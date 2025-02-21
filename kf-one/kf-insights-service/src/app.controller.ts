@@ -20,7 +20,7 @@ export class AppController {
   daprHost = process.env.DAPR_HOST || 'http://localhost';
   daprPort = process.env.DAPR_HTTP_PORT || '3512';
   base_url = `${this.daprHost}:${this.daprPort}`;
-  pubsubName = 'kf-pubsub';
+  pubsubName = 'rbt-pubsub';
   topicName = 'kfone';
   pubsubEndpoint = `${this.daprHost}:${this.daprPort}/v1.0/publish/${this.pubsubName}/${this.topicName}`;
   DAPR_SECRET_STORE = 'localsecretstore';

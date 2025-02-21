@@ -28,7 +28,7 @@ export class AppController {
   daprPort = process.env.DAPR_HTTP_PORT || '3500';
   base_url = `${this.daprHost}:${this.daprPort}`;
   pubsubName = process.env.PUBSUB_NAME || 'rbt-pubsub';
-  topicName = process.env.TOPIC_NAME || 'kf-one';
+  topicName = process.env.TOPIC_NAME || 'kfone';
   pubsubEndpoint = `${this.daprHost}:${this.daprPort}/v1.0/publish/${this.pubsubName}/${this.topicName}`;
   DAPR_SECRET_STORE = process.env.DAPR_SECRET_STORE || 'localsecretstore';
   SECRET_NAME = 'secret';
@@ -55,7 +55,7 @@ export class AppController {
     this.logger.info('publishing Org details', createOrganizationDto);
     const eventObject: eventWrapper = {
       type: 'createOrganization',
-      source: 'kf-one',
+      source: 'kfone',
       data: createOrganizationDto,
     };
     axios
@@ -86,10 +86,10 @@ export class AppController {
   @ApiForbiddenResponse({ description: 'Forbidden.' }) // 403
   @ApiBody({ type: CreateEmployeeDto })
   createEmployee(@Body() createEmployeeDto: CreateEmployeeDto): any {
-    this.logger.info('publishing Org details', createEmployeeDto);
+    this.logger.info('publishing Org details', JSON.stringify(createEmployeeDto));
     const eventObject: eventWrapper = {
       type: 'createEmployee',
-      source: 'kf-one',
+      source: 'kfone',
       data: createEmployeeDto,
     };
     axios

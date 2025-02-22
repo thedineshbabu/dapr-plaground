@@ -6,6 +6,7 @@ import { SendOtpDto } from './dto/sendotp.dto';
 import { VerifyOtpDto } from './dto/verifyotp.dto';
 import * as crypto from 'crypto';
 import * as nodemailer from 'nodemailer';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserVerificationService {
@@ -33,6 +34,28 @@ export class UserVerificationService {
     await this.sendEmail(dto.email, otp);
 
     return 'OTP sent successfully!';
+  }
+
+  async registerUser(email: string, password: string) {
+    console.log('Received password:', password);
+    console.log('Type of password:', typeof password);
+
+    if (!password || typeof password !== 'string') {
+      throw new Error('Password must be a valid string');
+    }
+  
+    const saltRounds = 10; // Ensure salt rounds is a number
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+    const newUser = this.userVerificationRepo.create({
+      email,
+      password: hashedPassword,
+      failed_attempts: 0,
+      is_locked: false,
+      is_verified: false,
+    });
+  
+    await this.userVerificationRepo.save(newUser);
   }
 
   async verifyOtp(dto: VerifyOtpDto): Promise<string> {
